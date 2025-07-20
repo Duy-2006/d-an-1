@@ -4,6 +4,7 @@
  */
 package BanSach.entity;
 
+import java.util.Date;
 import lombok.*;
 
 /**

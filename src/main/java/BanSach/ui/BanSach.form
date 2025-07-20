@@ -53,7 +53,11 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
               <EmptySpace min="0" pref="884" max="32767" attributes="0"/>
+=======
+              <EmptySpace min="0" pref="904" max="32767" attributes="0"/>
+>>>>>>> d9eefae (cap nhat moi)
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -68,17 +72,31 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
               <Group type="102" attributes="0">
+=======
+              <Group type="102" alignment="0" attributes="0">
+>>>>>>> d9eefae (cap nhat moi)
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel5" alignment="1" max="32767" attributes="0"/>
                       <Component id="btnHome" alignment="0" max="32767" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="btnAccount" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnProduct" alignment="0" max="32767" attributes="0"/>
+=======
+                      <Component id="btnCat" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnAccount" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnProduct" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+>>>>>>> d9eefae (cap nhat moi)
                       <Component id="jSeparator2" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnsach" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnloaisach" alignment="0" max="32767" attributes="0"/>
                       <Component id="btndonhang" alignment="0" max="32767" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="btncard" alignment="0" pref="253" max="32767" attributes="0"/>
                       <Component id="btnqlnhanvien" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnqlkm" alignment="0" max="32767" attributes="0"/>
@@ -99,6 +117,16 @@
                           <Component id="jLabel1" min="-2" pref="177" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
+=======
+                      <Component id="btncard" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnqlnhanvien" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnqlkm" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="btndanhthu" alignment="0" max="32767" attributes="0"/>
+>>>>>>> d9eefae (cap nhat moi)
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -108,20 +136,36 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="jLabel1" min="-2" pref="139" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btntrangchu" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
+=======
+                  <Component id="jLabel1" min="-2" pref="115" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+>>>>>>> d9eefae (cap nhat moi)
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnHome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                   <Component id="btnAccount" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnProduct" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+=======
+                  <Component id="btnCat" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnAccount" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnProduct" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+>>>>>>> d9eefae (cap nhat moi)
                   <Component id="jSeparator2" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -150,12 +194,27 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="1"/>
             </Property>
+<<<<<<< HEAD
             <Property name="text" type="java.lang.String" value="B&#xc1;N H&#xc0;NG "/>
+=======
+            <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m s&#xe1;ch"/>
+>>>>>>> d9eefae (cap nhat moi)
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHomeActionPerformed"/>
           </Events>
         </Component>
+<<<<<<< HEAD
+=======
+        <Component class="javax.swing.JButton" name="btnCat">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="T&#x1ea1;o H&#xf3;a &#x111;&#x1a1;n"/>
+          </Properties>
+        </Component>
+>>>>>>> d9eefae (cap nhat moi)
         <Component class="javax.swing.JButton" name="btnAccount">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -191,9 +250,21 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+<<<<<<< HEAD
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/bansach/icon/hinh2.png"/>
             </Property>
+=======
+            <Property name="text" type="java.lang.String" value="jLabel1"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="24" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="TRANG CH&#x1ee6;"/>
+>>>>>>> d9eefae (cap nhat moi)
           </Properties>
         </Component>
         <Component class="javax.swing.JSeparator" name="jSeparator1">
@@ -277,9 +348,12 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; khuy&#x1ebf;n m&#xe3;i"/>
           </Properties>
+<<<<<<< HEAD
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnqlkmActionPerformed"/>
           </Events>
+=======
+>>>>>>> d9eefae (cap nhat moi)
         </Component>
         <Component class="javax.swing.JButton" name="btndanhthu">
           <Properties>
@@ -292,6 +366,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btndanhthuActionPerformed"/>
           </Events>
         </Component>
+<<<<<<< HEAD
         <Component class="javax.swing.JButton" name="btntrangchu">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -303,6 +378,8 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btntrangchuActionPerformed"/>
           </Events>
         </Component>
+=======
+>>>>>>> d9eefae (cap nhat moi)
       </SubComponents>
     </Container>
   </SubComponents>

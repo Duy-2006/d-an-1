@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+D
 bansach\ui\PromotionJPanel$4.class
 bansach\ui\RevenueManagerJPanel$2.class
 bansach\entity\Employee.class
@@ -23,10 +23,6 @@ bansach\entity\BookCategory.class
 bansach\entity\Promotion.class
 bansach\ui\CardManagerJPanel$8.class
 bansach\ui\EmployeeManagerJDialogJPanel$3.class
-<<<<<<< HEAD
-=======
-bansach\ui\MembershipCardJPanel$1.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\GetFamiliarJDialog$3.class
 bansach\ui\BillManagerJPanel$7.class
 bansach\entity\BookCategory$BookCategoryBuilder.class
@@ -42,24 +38,14 @@ bansach\entity\BillDetail$BillDetailBuilder.class
 bansach\entity\PromotionBook$PromotionBookBuilder.class
 bansach\ui\BillJPanel$4.class
 bansach\ui\CategoryController.class
-<<<<<<< HEAD
 bansach\ui\CardManagerJPanel$11.class
 bansach\ui\GetFamiliarJDialog$2.class
 bansach\ui\EmployeeManagerJDialogJPanel$11.class
-=======
-bansach\ui\GetFamiliarJDialog$2.class
-bansach\ui\EmployeeManagerJDialogJPanel$11.class
-bansach\ui\MembershipCardJPanel$2.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\PromotionJPanel$3.class
 bansach\ui\BanSach$12.class
 bansach\ui\BillManagerJPanel$1.class
 bansach\ui\EmployeeManagerJDialogJPanel$8.class
 bansach\ui\CardManagerJPanel$3.class
-<<<<<<< HEAD
-=======
-bansach\entity\MembershipCard$MembershipCardBuilder.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\Dao\impl\BookDAOImpl.class
 bansach\ui\BanSach$5.class
 bansach\entity\Bill.class
@@ -77,20 +63,13 @@ bansach\ui\BanSach.class
 bansach\ui\BookManagerJPanel$17.class
 bansach\ui\CategoryManagerJPanel$7.class
 bansach\ui\BanSach$1.class
-<<<<<<< HEAD
-=======
-bansach\Dao\MembershipCardDAO.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\BillJPanel$6.class
 bansach\Dao\BookDAO.class
 bansach\ui\BookManagerJPanel$1.class
 bansach\ui\EmployeeManagerJDialogJPanel$7.class
 bansach\ui\CardManagerJPanel$9.class
 bansach\ui\BanSach$4.class
-<<<<<<< HEAD
 bansach\util\EmailUtil.class
-=======
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\loginJDialog.class
 bansach\ui\HistoryJPanel$3.class
 bansach\ui\EmployeeManagerJDialogJPanel.class
@@ -117,10 +96,7 @@ bansach\ui\RevenueManagerJPanel.class
 bansach\ui\RevenueManagerJPanel$3.class
 bansach\ui\CardManagerJPanel$6.class
 bansach\ui\CategoryManagerJPanel$8.class
-<<<<<<< HEAD
 bansach\ui\CardManagerJPanel$14.class
-=======
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\CategoryManagerJPanel$11.class
 bansach\ui\BillManagerJPanel$5.class
 bansach\Dao\impl\BillDAOImpl.class
@@ -144,10 +120,6 @@ bansach\entity\Promotion$PromotionBuilder.class
 bansach\ui\BanSach$3.class
 bansach\ui\CardController.class
 bansach\entity\Revenue$ByCategory.class
-<<<<<<< HEAD
-=======
-bansach\ui\MembershipCardJPanel$4.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\BanSach$10.class
 bansach\ui\CategoryManagerJPanel$6.class
 bansach\ui\BillManagerJPanel.class
@@ -155,24 +127,15 @@ bansach\Dao\impl\PromotionBookDAOImpl.class
 bansach\ui\CardManagerJPanel$5.class
 bansach\ui\BillManagerJPanel$3.class
 com\mycompany\duan\bansachonline\DuAnBanSachOnLine.class
-<<<<<<< HEAD
 bansach\ui\CardManagerJPanel$13.class
-=======
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\EmployeeManagerJDialogJPanel$10.class
 bansach\ui\CrudController.class
 bansach\util\XStr.class
 bansach\Dao\impl\BookCategoryDAOImpl.class
 bansach\ui\BookManagerJPanel$15.class
-<<<<<<< HEAD
 bansach\ui\BookManagerJPanel$11.class
 bansach\entity\Revenue.class
 bansach\ui\CardManagerJPanel$12.class
-=======
-bansach\ui\MembershipCardJPanel.class
-bansach\ui\BookManagerJPanel$11.class
-bansach\entity\Revenue.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\CategoryManagerJPanel$13.class
 bansach\ui\CardManagerJPanel$4.class
 bansach\Dao\PromotionDAO.class
@@ -191,10 +154,7 @@ bansach\ui\SalesJPanel.class
 bansach\ui\BookManagerJPanel$10.class
 bansach\ui\BillManagerJPanel$12.class
 bansach\ui\HistoryJPanel$1.class
-<<<<<<< HEAD
 bansach\util\EmailUtil$1.class
-=======
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\BillController.class
 bansach\util\TimeRange.class
 bansach\ui\BanSach$11.class
@@ -203,10 +163,6 @@ bansach\ui\CategoryManagerJPanel$4.class
 bansach\ui\BookManagerJPanel$7.class
 bansach\ui\EmployeeManagerJDialogJPanel$1.class
 bansach\ui\HistoryController.class
-<<<<<<< HEAD
-=======
-bansach\ui\MembershipCardJPanel$3.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\BanSach$7.class
 bansach\ui\BillController1.class
 bansach\ui\BillManagerJPanel$13.class
@@ -220,7 +176,6 @@ bansach\ui\BookManagerJPanel$12.class
 bansach\ui\HistoryJPanel.class
 bansach\util\XAuth.class
 bansach\ui\EmployeeManagerJDialogJPanel$16.class
-<<<<<<< HEAD
 bansach\ui\PromotionJPanel.class
 bansach\ui\BookManagerJPanel$9.class
 bansach\ui\BanSach$9.class
@@ -230,37 +185,14 @@ bansach\ui\PromotionBookJPanel$3.class
 bansach\ui\PromotionBookJPanel.class
 bansach\ui\BookManagerJPanel.class
 bansach\ui\EmployeeManagerJDialogJPanel$13.class
-=======
-bansach\ui\PromotionJPanel$8.class
-bansach\ui\PromotionJPanel.class
-bansach\ui\BookManagerJPanel$9.class
-bansach\ui\MembershipCardJPanel$5$1.class
-bansach\ui\BanSach$9.class
-bansach\ui\BillJPanel.class
-bansach\Dao\CardDAO.class
-bansach\ui\PromotionBookJPanel.class
-bansach\ui\e.class
-bansach\ui\BookManagerJPanel.class
-bansach\ui\EmployeeManagerJDialogJPanel$13.class
-bansach\Dao\impl\MembershipCardDAOImpl.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\ui\BillJPanel$1.class
 bansach\ui\CategoryManagerJPanel$2.class
 bansach\ui\BillManagerJPanel$16.class
 bansach\ui\ChangePasswordJDialog$2.class
 bansach\ui\PromotionJPanel$6.class
-<<<<<<< HEAD
 bansach\util\XDate.class
 bansach\ui\BillManagerJPanel$21.class
 bansach\ui\BookManagerJPanel$8.class
-=======
-bansach\entity\MembershipCard.class
-bansach\ui\GetFamiliarJDialog$3$1.class
-bansach\util\XDate.class
-bansach\ui\BillManagerJPanel$21.class
-bansach\ui\BookManagerJPanel$8.class
-bansach\ui\MembershipCardJPanel$5.class
->>>>>>> 36a8b6c (Lưu code chỉnh sửa)
 bansach\Dao\BillDetailDAO.class
 bansach\util\XDialog.class
 bansach\ui\PromotionJPanel$7.class
@@ -273,23 +205,3 @@ bansach\ui\ChangePasswordController.class
 bansach\Dao\EmployeeDAO.class
 bansach\ui\BookManagerJPanel$13.class
 bansach\ui\EmployeeManagerJDialogJPanel$14.class
-=======
-ThuNghiem\BillPanel.class
-ThuNghiem\BillPanel$3.class
-bansach\ui\SoLuongJDialog$2$1.class
-ThuNghiem\SachPanel.class
-bansach\entity\Invoice.class
-bansach\ui\SalesJPanel$3.class
-bansach\ui\SoLuongJDialog$2.class
-ThuNghiem\SachPanel$1.class
-ThuNghiem\SachPanel$2.class
-ThuNghiem\SalesPanelController.class
-bansach\ui\SoLuongJDialog$1.class
-bansach\ui\SalesJPanel$2.class
-bansach\ui\SalesJPanel$1.class
-ThuNghiem\Test.class
-bansach\ui\SoLuongJDialog.class
-bansach\entity\Invoice$InvoiceBuilder.class
-ThuNghiem\BillPanel$2.class
-ThuNghiem\BillPanel$1.class
->>>>>>> b7cd0d4 (Them chuc nang cho sale)

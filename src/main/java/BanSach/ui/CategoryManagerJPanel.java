@@ -430,7 +430,6 @@ BookCategoryDAO dao = new BookCategoryDAOImpl();
             txtId.requestFocus();
             return;
         }
-
         if (txtName.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, " Tên không được để trống!", "Lỗi", JOptionPane.ERROR_MESSAGE);
             txtName.requestFocus();
