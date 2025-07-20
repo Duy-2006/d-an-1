@@ -14,12 +14,46 @@ import BanSach.entity.User;
  */
 public class XAuth {
 
-    public static User user = User.builder()
-            .username("user1@gmail.com")
-            .password("123")
-            .enabled(true)
-            .manager(true)
-            .fullname("Nguyễn Văn Tèo")
-            .photo("trump.png")
-            .build(); // biến user này sẽ được thay thế sau khi đăng nhập
+  /**
+ * Tiện ích xác thực người dùng hiện tại
+ * Giữ thông tin người dùng đã đăng nhập và hỗ trợ kiểm tra quyền hạn
+ */
+
+    // Biến lưu người dùng hiện tại (đã đăng nhập)
+    public static User user = null;
+
+    /**
+     * Đăng xuất: xoá người dùng hiện tại
+     */
+    public static void clear() {
+        user = null;
+    }
+
+    /**
+     * Kiểm tra đã đăng nhập hay chưa
+     */
+    public static boolean isLogin() {
+        return user != null;
+    }
+
+    /**
+     * Kiểm tra người dùng hiện tại có phải là quản lý (admin) hay không
+     */
+    public static boolean isManager() {
+        return isLogin() && user.isManager();
+    }
+
+    /**
+     * Lấy tên đăng nhập của người dùng hiện tại
+     */
+    public static String getUsername() {
+        return isLogin() ? user.getUsername() : "";
+    }
+
+    /**
+     * Lấy họ tên người dùng (nếu đã đăng nhập)
+     */
+    public static String getFullName() {
+        return isLogin() ? user.getFullName() : "";
+    }
 }

@@ -6,14 +6,14 @@ package BanSach.Dao;
 
 import BanSach.entity.User;
 
-
-
-
-
 /**
  *
  * @author ADMIN
  */
-public interface UserDAO extends CrudDAO<User, String> {     
-    
+public interface UserDAO extends CrudDAO<User, String> {
+
+    User findByUsername(String username);
+
+    boolean updatePassword(String username, String newPassword);
+
 }
