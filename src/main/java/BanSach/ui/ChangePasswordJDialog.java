@@ -4,10 +4,10 @@
  */
 package BanSach.ui;
 
-import BanSach.Dao.UserDAO;
-import BanSach.Dao.impl.UserDAOImpl;
+import BanSach.Dao.impl.EmployeeDAOImpl;
 import BanSach.util.XAuth;
 import BanSach.util.XDialog;
+import BanSach.Dao.EmployeeDAO;
 
 /**
  *
@@ -218,7 +218,7 @@ public class ChangePasswordJDialog extends javax.swing.JDialog implements Change
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
-UserDAO dao = new UserDAOImpl();
+EmployeeDAO dao = new EmployeeDAOImpl();
     @Override
     public void open() {
         this.setLocationRelativeTo(null);
