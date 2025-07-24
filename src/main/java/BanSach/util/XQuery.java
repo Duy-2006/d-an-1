@@ -70,20 +70,31 @@ public class XQuery {
      * @throws RuntimeException lỗi truy vấn
      */
     private static <B> B readBean(ResultSet resultSet, Class<B> beanClass) throws Exception {
-        B bean = beanClass.getDeclaredConstructor().newInstance();
-        Method[] methods = beanClass.getDeclaredMethods();
-        for (Method method : methods) {
-            String name = method.getName();
-            if (name.startsWith("set") && method.getParameterCount() == 1) {
-                try {
-                    Object value = resultSet.getObject(name.substring(3));
-                    method.invoke(bean, value);
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SQLException e) {
-                    System.out.printf("+ Column '%s' not found!\r\n", name.substring(3));
+         B bean = beanClass.getDeclaredConstructor().newInstance();
+    Method[] methods = beanClass.getDeclaredMethods();
+    for (Method method : methods) {
+        String name = method.getName();
+        if (name.startsWith("set") && method.getParameterCount() == 1) {
+            String columnName = name.substring(3); // Ví dụ: StartDate
+            Class<?> paramType = method.getParameterTypes()[0];
+
+            try {
+                Object value = resultSet.getObject(columnName);
+
+                // Xử lý LocalDate riêng
+                if (value instanceof java.sql.Date && paramType == java.time.LocalDate.class) {
+                    value = ((java.sql.Date) value).toLocalDate();
                 }
+
+                // Có thể thêm xử lý Timestamp → LocalDateTime nếu cần
+
+                method.invoke(bean, value);
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SQLException e) {
+                System.out.printf("+ Column '%s' not found or type mismatch!\r\n", columnName);
             }
         }
-        return bean;
+    }
+    return bean;
     }
 
     public static void main(String[] args) {

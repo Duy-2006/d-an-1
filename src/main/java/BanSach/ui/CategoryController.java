@@ -4,7 +4,7 @@
  */
 package BanSach.ui;
 
-import BanSach.entity.Category;
+import BanSach.entity.BookCategory;
 
 
 
@@ -12,6 +12,6 @@ import BanSach.entity.Category;
  *
  * @author ADMIN
  */
-public interface CategoryController extends CrudController<Category>{
+public interface CategoryController extends CrudController<BookCategory>{
  
 }

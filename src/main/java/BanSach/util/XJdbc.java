@@ -29,7 +29,7 @@ public class XJdbc {
      */
     public static Connection openConnection() {
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String dburl = "jdbc:sqlserver://localhost;database=TEST;encrypt=true;trustServerCertificate=true;";
+        String dburl = "jdbc:sqlserver://localhost;database=bookk;encrypt=true;trustServerCertificate=true;";
         String username = "sa";
         String password = "12345";
         try {

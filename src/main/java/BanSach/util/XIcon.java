@@ -42,8 +42,19 @@ public class XIcon {
      * @return Icon
      */
     public static ImageIcon getIcon(String path, int width, int height) {
-        Image image = getIcon(path).getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-        return new ImageIcon(image);
+        ImageIcon icon = getIcon(path);
+    if (icon == null) {
+        icon = getIcon("default.png"); // ảnh mặc định nếu null
+    }
+
+    // Kiểm tra null tiếp (trường hợp default cũng không tồn tại)
+    if (icon == null || icon.getIconWidth() <= 0 || icon.getIconHeight() <= 0 || width <= 0 || height <= 0) {
+        System.err.println("Không thể resize ảnh: " + path + " - Kích thước không hợp lệ.");
+        return new ImageIcon(); // trả về ảnh trống
+    }
+
+    Image image = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+    return new ImageIcon(image);
     }
     /**
      * Thay đổi icon của JLabel
@@ -51,7 +62,14 @@ public class XIcon {
      * @param path đường dẫn file hoặc tài nguyên
      */
     public static void setIcon(JLabel label, String path) {
-        label.setIcon(XIcon.getIcon(path, label.getWidth(), label.getHeight()));
+         // Nếu chưa render xong, set icon sau 1 chút
+    if (label.getWidth() <= 0 || label.getHeight() <= 0) {
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            label.setIcon(getIcon(path, 100, 100)); // fallback size
+        });
+    } else {
+        label.setIcon(getIcon(path, label.getWidth(), label.getHeight()));
+    }
     }
     /**
      * Thay đổi icon của JLabel

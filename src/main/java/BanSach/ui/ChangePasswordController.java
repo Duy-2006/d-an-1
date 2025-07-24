@@ -4,7 +4,7 @@
  */
 package BanSach.ui;
 
-import BanSach.Dao.impl.UserDAOImpl;
+import BanSach.Dao.impl.EmployeeDAOImpl;
 
 /**
  *

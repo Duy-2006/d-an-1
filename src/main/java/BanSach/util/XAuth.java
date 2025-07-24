@@ -4,7 +4,7 @@
  */
 package BanSach.util;
 
-import BanSach.entity.User;
+import BanSach.entity.Employee;
 
 
 
@@ -20,7 +20,7 @@ public class XAuth {
  */
 
     // Biến lưu người dùng hiện tại (đã đăng nhập)
-    public static User user = null;
+    public static Employee user = null;
 
     /**
      * Đăng xuất: xoá người dùng hiện tại
@@ -40,7 +40,7 @@ public class XAuth {
      * Kiểm tra người dùng hiện tại có phải là quản lý (admin) hay không
      */
     public static boolean isManager() {
-        return isLogin() && user.isManager();
+        return isLogin() && user.isStatus();
     }
 
     /**

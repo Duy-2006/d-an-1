@@ -4,11 +4,11 @@
  */
 package BanSach.ui;
 
-import BanSach.Dao.UserDAO;
-import BanSach.Dao.impl.UserDAOImpl;
-import BanSach.entity.User;
+import BanSach.Dao.impl.EmployeeDAOImpl;
+import BanSach.entity.Employee;
 import BanSach.util.XAuth;
 import BanSach.util.XDialog;
+import BanSach.Dao.EmployeeDAO;
 
 /**
  *
@@ -173,11 +173,6 @@ public class loginJDialog extends javax.swing.JDialog implements LoginController
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -185,29 +180,15 @@ public class loginJDialog extends javax.swing.JDialog implements LoginController
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(loginJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(loginJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(loginJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(loginJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                loginJDialog dialog = new loginJDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        // 👉 Mở form đăng nhập trước
+        java.awt.EventQueue.invokeLater(() -> {
+            loginJDialog login = new loginJDialog(null, true); // modal=true
+            login.setVisible(true);
+
         });
     }
 
@@ -233,18 +214,18 @@ public class loginJDialog extends javax.swing.JDialog implements LoginController
     public void login() {
         String username = txtUsename.getText();
         String password = txtPassword.getText();
-        UserDAO dao = new UserDAOImpl();
-        User user = dao.findById(username);
-        if (user == null) {
+        EmployeeDAO dao = new EmployeeDAOImpl();
+        Employee employee = dao.findByUsername(username);
+        if (employee == null) {
             XDialog.alert("Sai tên đăng nhập!");
-        } else if (!password.equals(user.getPassword())) {
+        } else if (!password.equals(employee.getPassword())) {
             XDialog.alert("Sai mật khẩu đăng nhập!");
-        } else if (!user.isEnabled()) {
+        } else if (!employee.isStatus()) {
             XDialog.alert("Tài khoản của bạn đang tạm dừng!");
         } else {
-            XAuth.user = user; // duy trì user đăng nhập
+            XAuth.user = employee; // duy trì user đăng nhập
             this.dispose();
-
+            
         }
     }
 }

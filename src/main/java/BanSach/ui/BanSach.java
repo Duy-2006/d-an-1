@@ -4,6 +4,7 @@
  */
 package BanSach.ui;
 
+import BanSach.util.XAuth;
 import java.awt.CardLayout;
 
 /**
@@ -20,6 +21,7 @@ public class BanSach extends javax.swing.JFrame {
     public BanSach() {
         initComponents();
         this.initPanel();
+        initRole(); // Phân quyền cho nút
     }
 
     public void showChangePasswordJDialog(java.awt.Frame parent) {
@@ -32,9 +34,9 @@ public class BanSach extends javax.swing.JFrame {
 
         this.mainPanel.setLayout(cardLayout);
 
-//    // Thêm panel trống mặc định
-//    JPanel emptyPanel = new JPanel();
-//    mainPanel.add("EMPTY", emptyPanel);
+        // Thêm panel trống mặc định
+        RongJPanel rongJPanel = new RongJPanel();
+        mainPanel.add("RONG", rongJPanel);
         // Thêm panel quản lý thể loại
         CategoryManagerJPanel categoryManagerJPanel = new CategoryManagerJPanel();
         mainPanel.add("CATEGORY_MANAGER", categoryManagerJPanel);
@@ -42,22 +44,34 @@ public class BanSach extends javax.swing.JFrame {
         CardManagerJPanel cardManagerJPanel = new CardManagerJPanel();
         mainPanel.add("CARD_MANAGER", cardManagerJPanel); // dùng key khác
 
-        DrinkManagerJPanel drinkManagerJPanel = new DrinkManagerJPanel();
+        BookManagerJPanel drinkManagerJPanel = new BookManagerJPanel();
         mainPanel.add("DRINK_MANAGER", drinkManagerJPanel); // dùng key khác
 
         BillManagerJPanel billManagerJPanel = new BillManagerJPanel();
         mainPanel.add("BILL_MANAGER", billManagerJPanel); // dùng key khác
 
-        UserManagerJDialogJPanel userManagerJDialogJPanel = new UserManagerJDialogJPanel();
+        EmployeeManagerJDialogJPanel userManagerJDialogJPanel = new EmployeeManagerJDialogJPanel();
         mainPanel.add("USER_MANAGER", userManagerJDialogJPanel); // dùng key khác
 
         RevenueManagerJPanel revenueManagerJPanel = new RevenueManagerJPanel();
         mainPanel.add("REVENUE_MANAGER", revenueManagerJPanel); // dùng key khác
 
-//         drinkManagerJPanel = new DrinkManagerJPanel();
-//       mainPanel.add("DRINK_MANAGER", drinkManagerJPanel); // dùng key khác
-        // Hiển thị panel trống trước
-//    cardLayout.show(mainPanel, "EMPTY");
+         PromotionJPanel promotionJPanel  = new PromotionJPanel ();
+       mainPanel.add("PROMOTION", promotionJPanel ); // dùng key khác
+        
+    }
+
+    private void initRole() {
+        if (!XAuth.user.isRole()) { // nếu không phải admin
+            btnqlnhanvien.setVisible(false);  // Ẩn nút Quản lý nhân viên
+            btnqlkm.setVisible(false);         // Ẩn nút Quản lý khuyến mãi
+            btndanhthu.setVisible(false);      // Ẩn nút Thống kê doanh thu
+            btnloaisach.setVisible(false);
+            btnsach.setVisible(false);
+            btncard.setVisible(false);
+            btndonhang.setVisible(false);
+
+        }
     }
 
     /**
@@ -72,12 +86,10 @@ public class BanSach extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         m = new javax.swing.JPanel();
         btnHome = new javax.swing.JButton();
-        btnCat = new javax.swing.JButton();
         btnAccount = new javax.swing.JButton();
         btnProduct = new javax.swing.JButton();
         btnsach = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel4 = new javax.swing.JLabel();
@@ -88,6 +100,7 @@ public class BanSach extends javax.swing.JFrame {
         btnqlnhanvien = new javax.swing.JButton();
         btnqlkm = new javax.swing.JButton();
         btndanhthu = new javax.swing.JButton();
+        btntrangchu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,7 +108,7 @@ public class BanSach extends javax.swing.JFrame {
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 904, Short.MAX_VALUE)
+            .addGap(0, 884, Short.MAX_VALUE)
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,15 +116,12 @@ public class BanSach extends javax.swing.JFrame {
         );
 
         btnHome.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnHome.setText("Tìm kiếm sách");
+        btnHome.setText("BÁN HÀNG ");
         btnHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomeActionPerformed(evt);
             }
         });
-
-        btnCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnCat.setText("Tạo Hóa đơn");
 
         btnAccount.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnAccount.setText("Xem lịch sử");
@@ -137,10 +147,7 @@ public class BanSach extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel2.setText("TRANG CHỦ");
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bansach/icon/hinh2.png"))); // NOI18N
 
         jSeparator1.setForeground(new java.awt.Color(0, 153, 255));
 
@@ -186,12 +193,25 @@ public class BanSach extends javax.swing.JFrame {
 
         btnqlkm.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnqlkm.setText("Quản lý khuyến mãi");
+        btnqlkm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnqlkmActionPerformed(evt);
+            }
+        });
 
         btndanhthu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btndanhthu.setText("Thống kê doanh thu");
         btndanhthu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndanhthuActionPerformed(evt);
+            }
+        });
+
+        btntrangchu.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btntrangchu.setText("TRANG CHỦ ");
+        btntrangchu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btntrangchuActionPerformed(evt);
             }
         });
 
@@ -204,45 +224,48 @@ public class BanSach extends javax.swing.JFrame {
                 .addGroup(mLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProduct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator1)
                     .addComponent(jSeparator2)
                     .addComponent(btnsach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnloaisach, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btndonhang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btncard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btncard, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                     .addComponent(btnqlnhanvien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnqlkm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btndanhthu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGap(212, 212, 212)
+                        .addComponent(jSeparator1))
+                    .addGroup(mLayout.createSequentialGroup()
+                        .addGroup(mLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(btntrangchu, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btndanhthu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         mLayout.setVerticalGroup(
             mLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btntrangchu)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAccount)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProduct)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -331,6 +354,16 @@ public class BanSach extends javax.swing.JFrame {
         this.showChangePasswordJDialog(this);
     }//GEN-LAST:event_btnProductActionPerformed
 
+    private void btntrangchuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntrangchuActionPerformed
+        // TODO add your handling code here:
+         cardLayout.show(mainPanel, "RONG"); 
+    }//GEN-LAST:event_btntrangchuActionPerformed
+
+    private void btnqlkmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnqlkmActionPerformed
+        // TODO add your handling code here:
+         cardLayout.show(mainPanel, "PROMOTION"); 
+    }//GEN-LAST:event_btnqlkmActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -361,18 +394,25 @@ public class BanSach extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BanSach().setVisible(true);
-            }
+                loginJDialog login = new loginJDialog(null, true);
+                login.setVisible(true);
 
+                // Khi form login đóng thì kiểm tra xem user đã đăng nhập chưa
+                if (XAuth.user != null) {
+                    new BanSach().setVisible(true);  // mở form chính
+                } else {
+                    System.exit(0);  // thoát nếu không đăng nhập
+                }
+            }
             // viết thêm một hàm kiểm tra tài khoảng 
             //với quyền admin cao nhất trong db chưa 
             // nếu chưa thì tạo cho hệ thống 1 tài khoảng 
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccount;
-    private javax.swing.JButton btnCat;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnProduct;
     private javax.swing.JButton btncard;
@@ -382,8 +422,8 @@ public class BanSach extends javax.swing.JFrame {
     private javax.swing.JButton btnqlkm;
     private javax.swing.JButton btnqlnhanvien;
     private javax.swing.JButton btnsach;
+    private javax.swing.JButton btntrangchu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;

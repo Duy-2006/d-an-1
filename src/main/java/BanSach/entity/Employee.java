@@ -1,0 +1,27 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package BanSach.entity;
+
+import java.util.Date;
+import lombok.*;
+
+/**
+ *
+ * @author ADMIN
+ */
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
+public class Employee {
+
+ private String employeeID;      // Từ khóa chính
+    private String fullName;
+    private String phoneNumber;
+    private String username;
+    private String password;
+    private boolean role;           // true = admin, false = nhân viên
+    private boolean status;         // true = hoạt động, false = khóa
+}
