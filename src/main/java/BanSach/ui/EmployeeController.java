@@ -6,14 +6,33 @@ package BanSach.ui;
 
 import BanSach.entity.Employee;
 
-
-
-
-
 /**
  *
  * @author ADMIN
  */
-public interface EmployeeController extends CrudController<Employee>{
-    
+public interface EmployeeController extends CrudController<Employee> {
+
+    Employee getForm();
+
+    void setForm(Employee e);
+
+    void fillToTable();
+
+    void create();
+
+    void update();
+
+    void delete();
+
+    void clear();
+
+    void edit();
+
+    void moveFirst();
+
+    void movePrevious();
+
+    void moveNext();
+
+    void moveLast();
 }

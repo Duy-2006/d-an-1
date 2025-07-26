@@ -17,7 +17,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Data
+
 public class Employee {
+   
+    }
+
+
+    
 
  private String employeeId;      // Từ khóa chính
     private String fullName;
@@ -28,4 +34,6 @@ public class Employee {
     private boolean status;         // true = hoạt động, false = khóa
    private String securityQuestion;
     private String securityAnswer;
+
 }
+
