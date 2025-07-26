@@ -15,13 +15,28 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Data
-public class Employee {
 
- private String employeeID;      // Từ khóa chính
-    private String fullName;
-    private String phoneNumber;
-    private String username;
-    private String password;
-    private boolean role;           // true = admin, false = nhân viên
-    private boolean status;         // true = hoạt động, false = khóa
+public class Employee {
+    private String maNV;
+    private String tenNV;
+    private String sdt;
+    private String tenDangNhap;
+    private String matKhau;
+    private boolean vaiTro;
+    private boolean trangThai;
+
+    public Employee(String maNV, String tenNV, String sdt, String tenDangNhap, String matKhau, boolean vaiTro, boolean trangThai) {
+        this.maNV = maNV;
+        this.tenNV = tenNV;
+        this.sdt = sdt;
+        this.tenDangNhap = tenDangNhap;
+        this.matKhau = matKhau;
+        this.vaiTro = vaiTro;
+        this.trangThai = trangThai;
+    }
+
+    public boolean isRole() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
+

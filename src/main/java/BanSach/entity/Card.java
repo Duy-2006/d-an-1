@@ -4,6 +4,7 @@
  */
 package BanSach.entity;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,9 +18,18 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
+//public class Card {
+//
+//    private Integer id;
+//    private Integer status;
+//
+//}
 public class Card {
-
-    private Integer id;
-    private Integer status;
-
+    private String maThe;
+    private String maKhachHang;
+    private String maHang;
+    private int diemTichLuy;
+    private Date ngayCap;
+    private Date ngayHetHan;
+    // Getters, setters, constructor
 }

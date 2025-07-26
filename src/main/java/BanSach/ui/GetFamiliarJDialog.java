@@ -84,7 +84,7 @@ public class GetFamiliarJDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE)
+                        .addContainerGap()
                         .addComponent(btnxacnhan)
                         .addGap(33, 33, 33)
                         .addComponent(btnDoiMatKhau))
