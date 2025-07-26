@@ -26,7 +26,7 @@ public class Promotion {
     
      @Override
     public String toString() {
-        return promotionName; // để hiển thị trong combo box
+        return promotionID; // để hiển thị trong combo box
     }
     
    

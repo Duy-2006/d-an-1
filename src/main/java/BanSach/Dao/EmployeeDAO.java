@@ -5,6 +5,9 @@
 package BanSach.Dao;
 
 import BanSach.entity.Employee;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
@@ -12,8 +15,13 @@ import BanSach.entity.Employee;
  */
 public interface EmployeeDAO extends CrudDAO<Employee, String> {
 
+   Employee create(Employee entity);
+    void update(Employee entity);
+    void deleteById(String id);
+    List<Employee> findAll();
+    Employee findById(String id);
     Employee findByUsername(String username);
-
     boolean updatePassword(String username, String newPassword);
+
 
 }
