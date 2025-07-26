@@ -6,7 +6,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
-   <build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -52,28 +52,28 @@
             </plugin>
             
             <plugin>
-    <groupId>com.akathist.maven.plugins.launch4j</groupId>
-    <artifactId>launch4j-maven-plugin</artifactId>
-    <version>2.5.3</version>
-    <executions>
-        <execution>
-            <phase>package</phase>
-            <goals>
-                <goal>launch4j</goal>
-            </goals>
-        </execution>
-    </executions>
-    <configuration>
-        <outfile>${project.build.directory}/PolyCafe.exe</outfile>
-        <jar>${project.build.directory}/${project.build.finalName}.jar</jar>
-        <dontWrapJar>false</dontWrapJar>
-        <headerType>gui</headerType>
-        <mainClass>poly.cafe.uii.PolyCafejFrame</mainClass> <!-- sửa lại theo class chính của bạn -->
-        <jre>
-            <minVersion>1.8.0</minVersion>
-        </jre>
-    </configuration>
-</plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.5.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <outfile>${project.build.directory}/PolyCafe.exe</outfile>
+                    <!--<jar>${project.build.directory}/${project.build.finalName}.jar</jar>-->
+                    <dontWrapJar>false</dontWrapJar>
+                    <headerType>gui</headerType>
+                    <mainClass>poly.cafe.uii.PolyCafejFrame</mainClass> <!-- sửa lại theo class chính của bạn -->
+                    <jre>
+                        <minVersion>1.8.0</minVersion>
+                    </jre>
+                </configuration>
+            </plugin>
 
         </plugins>
     </build>
@@ -82,12 +82,18 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>23</maven.compiler.release> 
-        <exec.mainClass>com.mycompany.poly.cafee.PolyCafee</exec.mainClass>       
+        <!--<exec.mainClass>com.mycompany.poly.cafee.PolyCafee</exec.mainClass>-->       
     </properties>
     
    
     
     <dependencies>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        
         <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -95,6 +101,7 @@
             <version>12.8.1.jre11</version>
             <scope>compile</scope>
         </dependency>
+        
         
         <dependency>
             <groupId>org.projectlombok</groupId>

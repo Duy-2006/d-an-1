@@ -6,6 +6,7 @@ package BanSach.ui;
 
 import BanSach.Dao.PromotionDAO;
 import BanSach.Dao.impl.BookDAOImpl;
+import BanSach.Dao.impl.PromotionBookDAOImpl;
 import BanSach.entity.Promotion;
 import javax.swing.table.DefaultTableModel;
 import BanSach.entity.Promotion;
@@ -13,7 +14,9 @@ import BanSach.Dao.impl.PromotionDAOImpl;
 import java.awt.CardLayout;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,7 +26,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class PromotionJPanel extends javax.swing.JPanel implements PromotionControlle {
 
+    private static final Logger LOGGER = Logger.getLogger(PromotionJPanel.class.getName());
     private CardLayout cardLayout = new CardLayout();
+    private PromotionDAO dao = new PromotionDAOImpl();
+    private List<Promotion> items = new ArrayList<>();
+    private PromotionBookDAOImpl pbDao = new PromotionBookDAOImpl();
 
     /**
      * Creates new form PromotionJPanel
@@ -36,13 +43,11 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
     }
 
     private void init() {
+
         this.panel.setLayout(cardLayout);
-       PromotionBookJPanel  promotionBookJPanel  = new PromotionBookJPanel ();
-        panel.add("PROMOTION", promotionBookJPanel );
-        
-        
-        
-        
+        PromotionBookJPanel promotionBookJPanel = new PromotionBookJPanel();
+        panel.add("PROMOTION", promotionBookJPanel);
+
         tableModel.setModel(new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
@@ -54,24 +59,22 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         phamtram.setMajorTickSpacing(10);
         phamtram.setPaintTicks(true);
         phamtram.setPaintLabels(true);
-
         fillToTable();
     }
 
     private void loadBookIDs() {
         try {
-            List<String> bookIDs = new BookDAOImpl().findAllBookIDs(); // Giả sử bạn có DAO như vậy
+            List<String> bookIDs = new BookDAOImpl().findAllBookIDs();
             cbopromotion.removeAllItems();
+            cbopromotion.addItem(""); // Thêm tùy chọn rỗng
             for (String id : bookIDs) {
                 cbopromotion.addItem(id);
             }
         } catch (Exception e) {
+            LOGGER.severe("Error loading book IDs: " + e.getMessage());
             JOptionPane.showMessageDialog(this, "Lỗi khi load danh sách mã sách: " + e.getMessage());
         }
     }
-
-    PromotionDAO dao = new PromotionDAOImpl();
-    List<Promotion> items = List.of();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,7 +108,6 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         jScrollPane1 = new javax.swing.JScrollPane();
         tableModel = new javax.swing.JTable();
         btnnhunghoatdong = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("QUẢN LÝ KHUYẾN MÃI");
@@ -194,13 +196,6 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
             }
         });
 
-        jButton1.setText("Hiển thị danh sách ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -249,8 +244,7 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(143, 143, 143)
+                                .addGap(278, 278, 278)
                                 .addComponent(btnnhunghoatdong))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -306,8 +300,7 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
                             .addComponent(btnUpdate)
                             .addComponent(btnDelete)
                             .addComponent(btnClear)
-                            .addComponent(btnnhunghoatdong)
-                            .addComponent(jButton1))
+                            .addComponent(btnnhunghoatdong))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -319,10 +312,13 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         // TODO add your handling code here:
         int row = tableModel.getSelectedRow();
         if (row >= 0) {
-            PromotionDAOImpl dao = new PromotionDAOImpl();
-            String id = (String) tableModel.getValueAt(row, 0); // Giả sử cột đầu là ID
+            String id = (String) tableModel.getValueAt(row, 0);
             Promotion p = dao.findById(id);
             setForm(p);
+            // Hiển thị bookID đầu tiên (nếu có) từ Promotion_Book
+            List<String> bookIDs = pbDao.findBookIDsByPromotion(id);
+            btnmasach.setText(bookIDs.isEmpty() ? "" : bookIDs.get(0));
+            setEditable(true);
         }
     }//GEN-LAST:event_tableModelMouseClicked
 
@@ -351,12 +347,14 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         int row = tableModel.getSelectedRow();
         if (row >= 0) {
             String id = (String) tableModel.getValueAt(row, 0);
-            PromotionDAOImpl dao = new PromotionDAOImpl();
             Promotion p = dao.findById(id);
             if (p != null) {
-                p.setStatus(false); // Đặt trạng thái thành "Ngừng hoạt động"
+                p.setStatus(false);
                 dao.update(p);
                 fillToTable();
+                // Làm mới bảng trong PromotionBookJPanel
+                PromotionBookJPanel promotionBookJPanel = (PromotionBookJPanel) panel.getComponent(0);
+                promotionBookJPanel.loadAllPromotionBooks();
                 JOptionPane.showMessageDialog(this, "Đã ngừng hoạt động khuyến mãi!");
             }
         } else {
@@ -372,11 +370,6 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         }
     }//GEN-LAST:event_cbopromotionActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         cardLayout.show(panel, "PROMOTION");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     @Override
     public void open() {
         this.fillToTable();
@@ -390,6 +383,7 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         startDate.setText(entity.getStartDate() != null ? entity.getStartDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "");
         endDate.setText(entity.getEndDate() != null ? entity.getEndDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) : "");
         phamtram.setValue((int) (entity.getDiscountPercent() * 100));
+        // Không đặt bookID vì nó được quản lý trong Promotion_Book
     }
 
     @Override
@@ -397,8 +391,6 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         Promotion p = new Promotion();
         p.setPromotionID(txtpromotionID.getText().trim());
         p.setPromotionName(txtpromotionName.getText().trim());
-
-        // Kiểm tra và parse ngày với định dạng dd/MM/yyyy
         try {
             if (!startDate.getText().trim().isEmpty()) {
                 p.setStartDate(LocalDate.parse(startDate.getText().trim(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
@@ -410,23 +402,20 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
             JOptionPane.showMessageDialog(this, "Định dạng ngày không hợp lệ! Vui lòng dùng dd/MM/yyyy.");
             return null;
         }
-
         p.setDiscountPercent(phamtram.getValue() / 100.0f);
-        p.setStatus(true); // Mặc định là true, có thể thêm checkbox để thay đổi
+        p.setStatus(true);
         return p;
     }
 
     @Override
     public void fillToTable() {
         DefaultTableModel model = (DefaultTableModel) tableModel.getModel();
-        model.setRowCount(0); // Clear old data
-
+        model.setRowCount(0);
         try {
-            PromotionDAOImpl dao = new PromotionDAOImpl();
-            List<Promotion> list = dao.findAll(); // Load from DB
+            items = dao.findAll();
+            LOGGER.info("Loaded " + items.size() + " promotions");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-            for (Promotion p : list) {
+            for (Promotion p : items) {
                 model.addRow(new Object[]{
                     p.getPromotionID(),
                     p.getPromotionName(),
@@ -436,17 +425,36 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
                     p.isStatus() ? "Hoạt động" : "Ngừng hoạt động"
                 });
             }
+            tableModel.repaint();
+            tableModel.revalidate();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.severe("Error loading promotions: " + e.getMessage());
             JOptionPane.showMessageDialog(this, "Lỗi khi load dữ liệu khuyến mãi: " + e.getMessage());
+        }
+    }
+
+    private boolean isValidBookID(String bookID) {
+        if (bookID == null || bookID.trim().isEmpty()) {
+            return true; // Cho phép bookID rỗng nếu không bắt buộc
+        }
+        try {
+            BookDAOImpl bookDao = new BookDAOImpl();
+            return bookDao.findAllBookIDs().contains(bookID);
+        } catch (Exception e) {
+            return false;
         }
     }
 
     @Override
     public void edit() {
-        Promotion entity = items.get(tableModel.getSelectedRow());
-        this.setForm(entity);
-        this.setEditable(true);
+        int row = tableModel.getSelectedRow();
+        if (row >= 0 && row < items.size()) {
+            Promotion entity = items.get(row);
+            setForm(entity);
+            setEditable(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một khuyến mãi để chỉnh sửa!");
+        }
 
     }
 
@@ -456,7 +464,6 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         if (p == null) {
             return;
         }
-
         if (p.getPromotionID().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mã khuyến mãi không được để trống!");
             txtpromotionID.requestFocus();
@@ -471,14 +478,38 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
             JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ ngày bắt đầu và ngày kết thúc!");
             return;
         }
-
-        PromotionDAOImpl dao = new PromotionDAOImpl();
+        if (p.getEndDate().isBefore(p.getStartDate())) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày bắt đầu!");
+            return;
+        }
+        String bookID = btnmasach.getText().trim();
+        if (!bookID.isEmpty() && !isValidBookID(bookID)) {
+            JOptionPane.showMessageDialog(this, "Mã sách không hợp lệ!");
+            btnmasach.requestFocus();
+            return;
+        }
         try {
+            if (dao.findById(p.getPromotionID()) != null) {
+                JOptionPane.showMessageDialog(this, "Mã khuyến mãi đã tồn tại!");
+                return;
+            }
             dao.create(p);
+            if (!bookID.isEmpty()) {
+            pbDao.insert(p.getPromotionID(), bookID);
+        }
+        // Lấy instance của PromotionBookJPanel
+        PromotionBookJPanel promotionBookJPanel = (PromotionBookJPanel) panel.getComponent(0);
+        // Cập nhật danh sách khuyến mãi
+        promotionBookJPanel.loadPromotionList();
+        // Chọn mã khuyến mãi vừa thêm để kích hoạt loadBooksInPromotion()
+        promotionBookJPanel.getCboPromotion().setSelectedItem(p.getPromotionID());
+        promotionBookJPanel.loadAllPromotionBooks(); // Đảm bảo bảng được làm mới
+            
             fillToTable();
             clear();
             JOptionPane.showMessageDialog(this, "Thêm thành công!");
         } catch (Exception e) {
+            LOGGER.severe("Error creating promotion: " + e.getMessage());
             JOptionPane.showMessageDialog(this, "Lỗi khi thêm khuyến mãi: " + e.getMessage());
         }
     }
@@ -489,18 +520,30 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         if (p == null) {
             return;
         }
-
         if (p.getPromotionID().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn khuyến mãi để cập nhật!");
             return;
         }
-
-        PromotionDAOImpl dao = new PromotionDAOImpl();
+        String bookID = btnmasach.getText().trim();
+        if (!bookID.isEmpty() && !isValidBookID(bookID)) {
+            JOptionPane.showMessageDialog(this, "Mã sách không hợp lệ!");
+            btnmasach.requestFocus();
+            return;
+        }
         try {
             dao.update(p);
+            // Cập nhật liên kết trong Promotion_Book
+            pbDao.delete(p.getPromotionID(), null); // Xóa tất cả liên kết cũ
+            if (!bookID.isEmpty()) {
+                pbDao.insert(p.getPromotionID(), bookID); // Thêm liên kết mới
+            }
             fillToTable();
+            // Làm mới bảng trong PromotionBookJPanel
+            PromotionBookJPanel promotionBookJPanel = (PromotionBookJPanel) panel.getComponent(0);
+            promotionBookJPanel.loadAllPromotionBooks();
             JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
         } catch (Exception e) {
+            LOGGER.severe("Error updating promotion: " + e.getMessage());
             JOptionPane.showMessageDialog(this, "Lỗi khi cập nhật khuyến mãi: " + e.getMessage());
         }
     }
@@ -512,16 +555,21 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
             JOptionPane.showMessageDialog(this, "Vui lòng chọn khuyến mãi để xóa!");
             return;
         }
-
-        PromotionDAOImpl dao = new PromotionDAOImpl();
         int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn xóa khuyến mãi này?", "Xác nhận", JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
             try {
+                // Xóa liên kết trong Promotion_Book trước
+                PromotionBookDAOImpl pbDao = new PromotionBookDAOImpl();
+                pbDao.delete(id, null);
                 dao.deleteById(id);
                 fillToTable();
                 clear();
+                // Làm mới bảng trong PromotionBookJPanel
+                PromotionBookJPanel promotionBookJPanel = (PromotionBookJPanel) panel.getComponent(0);
+                promotionBookJPanel.loadAllPromotionBooks();
                 JOptionPane.showMessageDialog(this, "Xóa thành công!");
             } catch (Exception e) {
+                LOGGER.severe("Error deleting promotion: " + e.getMessage());
                 JOptionPane.showMessageDialog(this, "Lỗi khi xóa khuyến mãi: " + e.getMessage());
             }
         }
@@ -534,6 +582,8 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
         startDate.setText("");
         endDate.setText("");
         phamtram.setValue(0);
+        btnmasach.setText("");
+        setEditable(false); // Bật lại txtpromotionID và btnCreate
     }
 
     @Override
@@ -601,7 +651,6 @@ public class PromotionJPanel extends javax.swing.JPanel implements PromotionCont
     private javax.swing.JButton btnnhunghoatdong;
     private javax.swing.JComboBox<String> cbopromotion;
     private javax.swing.JTextField endDate;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

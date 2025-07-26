@@ -69,29 +69,80 @@ public class XQuery {
      * @return kết quả truy vấn
      * @throws RuntimeException lỗi truy vấn
      */
+     private static String toCamelCase(String columnName) {
+        StringBuilder sb = new StringBuilder();
+        boolean nextUpper = false;
+        for (int i = 0; i < columnName.length(); i++) {
+            char c = columnName.charAt(i);
+            if (c == '_' || c == ' ') {
+                nextUpper = true;
+            } else {
+                if (nextUpper) {
+                    sb.append(Character.toUpperCase(c));
+                    nextUpper = false;
+                } else {
+                    sb.append(c);
+                }
+            }
+        }
+        return sb.toString();
+    }
     private static <B> B readBean(ResultSet resultSet, Class<B> beanClass) throws Exception {
          B bean = beanClass.getDeclaredConstructor().newInstance();
-    Method[] methods = beanClass.getDeclaredMethods();
-    for (Method method : methods) {
-        String name = method.getName();
-        if (name.startsWith("set") && method.getParameterCount() == 1) {
-            String columnName = name.substring(3); // Ví dụ: StartDate
-            Class<?> paramType = method.getParameterTypes()[0];
+    var metaData = resultSet.getMetaData();
+    int columnCount = metaData.getColumnCount();
 
-            try {
-                Object value = resultSet.getObject(columnName);
+    // Lấy danh sách tất cả setter trong bean
+    Method[] methods = beanClass.getMethods();
 
-                // Xử lý LocalDate riêng
-                if (value instanceof java.sql.Date && paramType == java.time.LocalDate.class) {
-                    value = ((java.sql.Date) value).toLocalDate();
-                }
+    for (int i = 1; i <= columnCount; i++) {
+        String columnName = metaData.getColumnLabel(i);
+        Object value = resultSet.getObject(i);
 
-                // Có thể thêm xử lý Timestamp → LocalDateTime nếu cần
+        // Chuẩn hóa tên cột thành camelCase
+        String camelCaseName = toCamelCase(columnName);
 
-                method.invoke(bean, value);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | SQLException e) {
-                System.out.printf("+ Column '%s' not found or type mismatch!\r\n", columnName);
+        // Tên setter mong muốn, viết hoa chữ đầu camelCase
+        String setterName = "set" + camelCaseName.substring(0, 1).toUpperCase() + camelCaseName.substring(1);
+
+        // Tìm method setter không phân biệt chữ hoa/thường
+        Method setter = null;
+        for (Method method : methods) {
+            if (method.getName().equalsIgnoreCase(setterName) && method.getParameterCount() == 1) {
+                setter = method;
+                break;
             }
+        }
+
+        if (setter == null) {
+            System.out.printf("+ Setter '%s' not found for column '%s'!\r\n", setterName, columnName);
+            continue;
+        }
+
+        setter.setAccessible(true);
+
+        // Xử lý kiểu dữ liệu, ví dụ LocalDate, float...
+        Class<?> paramType = setter.getParameterTypes()[0];
+        if (value instanceof java.sql.Date && paramType == java.time.LocalDate.class) {
+            value = ((java.sql.Date) value).toLocalDate();
+        } else if (value instanceof Number) {
+            if (paramType == int.class || paramType == Integer.class) {
+                value = ((Number) value).intValue();
+            } else if (paramType == long.class || paramType == Long.class) {
+                value = ((Number) value).longValue();
+            } else if (paramType == float.class || paramType == Float.class) {
+                value = ((Number) value).floatValue();
+            } else if (paramType == double.class || paramType == Double.class) {
+                value = ((Number) value).doubleValue();
+            } 
+            // Thêm các kiểu số khác nếu cần
+        }
+
+        try {
+            setter.invoke(bean, value);
+            System.out.println("Mapped column: " + columnName + " to " + setter.getName() + " with value: " + value);
+        } catch (Exception e) {
+            System.out.printf("+ Error mapping column '%s': %s\r\n", columnName, e.getMessage());
         }
     }
     return bean;
