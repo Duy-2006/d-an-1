@@ -4,6 +4,8 @@
  */
 package BanSach.entity;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.*;
 
@@ -17,11 +19,13 @@ import lombok.*;
 @Data
 public class Employee {
 
- private String employeeID;      // Từ khóa chính
+ private String employeeId;      // Từ khóa chính
     private String fullName;
     private String phoneNumber;
     private String username;
     private String password;
     private boolean role;           // true = admin, false = nhân viên
     private boolean status;         // true = hoạt động, false = khóa
+   private String securityQuestion;
+    private String securityAnswer;
 }

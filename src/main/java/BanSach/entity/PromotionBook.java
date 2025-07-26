@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package BanSach.entity;
+
 import lombok.*;
+
 /**
  *
  * @author ADMIN
@@ -13,8 +15,10 @@ import lombok.*;
 @Data
 @Builder
 public class PromotionBook {
-      private String promotionID;
+
+    private String promotionID;
     private String bookID;
+
     
-    
+
 }
