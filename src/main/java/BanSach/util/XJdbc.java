@@ -33,7 +33,7 @@ public class XJdbc {
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
         String dburl = "jdbc:sqlserver://localhost;database=bookk;encrypt=true;trustServerCertificate=true;";
         String username = "sa";
-        String password = "1";
+        String password = "12345";
         try {
             if (!isReady()) {
                 Class.forName(driver);
