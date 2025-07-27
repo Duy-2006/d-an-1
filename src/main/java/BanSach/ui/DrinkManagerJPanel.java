@@ -4,7 +4,7 @@
  */
 package BanSach.ui;
 
-import BanSach.entity.Drink;
+import BanSach.entity.Book;
 
 /**
  *
@@ -533,12 +533,12 @@ public class DrinkManagerJPanel extends javax.swing.JPanel implements DrinkContr
     }
 
     @Override
-    public void setForm(Drink entity) {
+    public void setForm(Book entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public Drink getForm() {
+    public Book getForm() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

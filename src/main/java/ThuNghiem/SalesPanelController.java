@@ -2,20 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package BanSach.ui;
+package ThuNghiem;
 
 import BanSach.entity.Book;
 
-
-
 /**
  *
- * @author ADMIN
+ * @author KHANH HUNG
  */
-public interface DrinkController extends CrudController<Book> {
+public interface SalesPanelController {
 
-    void fillCategories();
+    void onAddToInvoice(Book book, int quantity); //thêm sách vào hóa đơn
 
-    void chooseFile();
 
+    void onUpdateQuantity(Book book, int quantity);
 }

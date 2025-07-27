@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 
+
+
 /**
  * Lớp tiện ích hỗ trợ làm việc với CSDL quan hệ
  *
@@ -29,9 +31,9 @@ public class XJdbc {
      */
     public static Connection openConnection() {
         String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-        String dburl = "jdbc:sqlserver://localhost;database=TEST;encrypt=true;trustServerCertificate=true;";
+        String dburl = "jdbc:sqlserver://localhost;database=bookk;encrypt=true;trustServerCertificate=true;";
         String username = "sa";
-        String password = "12345";
+        String password = "1";
         try {
             if (!isReady()) {
                 Class.forName(driver);

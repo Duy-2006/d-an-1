@@ -11,22 +11,19 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author ADMIN
+ * @author KHANH HUNG
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Drink {
+public class Invoice {
 
-    private String id;
-    private String name;
-    @Builder.Default
-    private String image = "product.png";
-    private double Price;
-    private double discount;
-    private boolean available;
-    private String categoryid;
-    
-
+    private String ngayTao;
+    private String ngayThanhToan;
+    private String maHD;
+    private String tenSach;
+    private int soLuong;
+    private double giaBan;
+    private String trangThai;
 }

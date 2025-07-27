@@ -4,7 +4,6 @@
  */
 package BanSach.entity;
 
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,13 +17,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Data
-public class Bill {
+public class Book {
 
-    private String ngayTao;
-    private String ngayThanhToan;
-    private String maHD;
-    private String tenSach;
-    private int soLuong;
-    private double giaBan;
-    private String trangThai;
+    private String id;
+    private String name;
+    @Builder.Default
+    private String image = "product.png";
+    private double salePrice;
+
+    
+    
+
 }
