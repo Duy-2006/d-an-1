@@ -132,5 +132,11 @@
             <version>5.10.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.streamlayer</groupId>
+            <artifactId>sl-protofiles</artifactId>
+            <version>5.146.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

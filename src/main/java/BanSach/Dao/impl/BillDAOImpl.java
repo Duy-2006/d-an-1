@@ -40,53 +40,53 @@ public class BillDAOImpl implements BillDAO {
         return XQuery.getBeanList(Bill.class, findByUsernameSql, username);
     }
 
-    @Override
-    public Bill create(Bill entity) {
-        try (Connection conn = XJdbc.openConnection(); PreparedStatement stmt = conn.prepareStatement(createSql)) {
+//    @Override
+//    public Bill create(Bill entity) {
+//        try (Connection conn = XJdbc.openConnection(); PreparedStatement stmt = conn.prepareStatement(createSql)) {
+//
+//            stmt.setString(1, entity.getUsername());
+//            stmt.setInt(2, entity.getCardId());
+//            stmt.setTimestamp(3, new java.sql.Timestamp(entity.getCheckin().getTime()));
+//
+//            if (entity.getCheckout() != null) {
+//                stmt.setTimestamp(4, new java.sql.Timestamp(entity.getCheckout().getTime()));
+//            } else {
+//                stmt.setNull(4, java.sql.Types.TIMESTAMP);
+//            }
+//
+//            stmt.setInt(5, entity.getStatus());
+//
+//            ResultSet rs = stmt.executeQuery();
+//            if (rs.next()) {
+//                entity.setId(rs.getLong(1)); // ✅ Lấy id sinh tự động
+//            }
+//
+//        } catch (Exception e) {
+//            throw new RuntimeException("Lỗi khi tạo Bill: " + e.getMessage(), e);
+//        }
+//
+//        return entity;
+//    }
 
-            stmt.setString(1, entity.getUsername());
-            stmt.setInt(2, entity.getCardId());
-            stmt.setTimestamp(3, new java.sql.Timestamp(entity.getCheckin().getTime()));
-
-            if (entity.getCheckout() != null) {
-                stmt.setTimestamp(4, new java.sql.Timestamp(entity.getCheckout().getTime()));
-            } else {
-                stmt.setNull(4, java.sql.Types.TIMESTAMP);
-            }
-
-            stmt.setInt(5, entity.getStatus());
-
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                entity.setId(rs.getLong(1)); // ✅ Lấy id sinh tự động
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException("Lỗi khi tạo Bill: " + e.getMessage(), e);
-        }
-
-        return entity;
-    }
-
-    @Override
-    public void update(Bill entity) {
-        String updateSql = "UPDATE Bills SET Username = ?, CardId = ?, Checkin = ?, Checkout = ?, Status = ? WHERE Id = ?";
-        Object[] values = {
-            entity.getUsername(),
-            entity.getCardId(),
-            entity.getCheckin() != null ? new java.sql.Timestamp(entity.getCheckin().getTime()) : null,
-            entity.getCheckout() != null ? new java.sql.Timestamp(entity.getCheckout().getTime()) : null,
-            entity.getStatus(),
-            entity.getId()
-        };
-        try {
-            int rowsAffected = XJdbc.executeUpdate(updateSql, values);
-            System.out.println("Update bill ID=" + entity.getId() + ", Rows affected: " + rowsAffected);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Lỗi khi cập nhật hóa đơn: " + e.getMessage());
-        }
-    }
+//    @Override
+//    public void update(Bill entity) {
+//        String updateSql = "UPDATE Bills SET Username = ?, CardId = ?, Checkin = ?, Checkout = ?, Status = ? WHERE Id = ?";
+//        Object[] values = {
+//            entity.getUsername(),
+//            entity.getCardId(),
+//            entity.getCheckin() != null ? new java.sql.Timestamp(entity.getCheckin().getTime()) : null,
+//            entity.getCheckout() != null ? new java.sql.Timestamp(entity.getCheckout().getTime()) : null,
+//            entity.getStatus(),
+//            entity.getId()
+//        };
+//        try {
+//            int rowsAffected = XJdbc.executeUpdate(updateSql, values);
+//            System.out.println("Update bill ID=" + entity.getId() + ", Rows affected: " + rowsAffected);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            throw new RuntimeException("Lỗi khi cập nhật hóa đơn: " + e.getMessage());
+//        }
+//    }
 
     @Override
     public void deleteById(Long id) {
@@ -109,20 +109,20 @@ public class BillDAOImpl implements BillDAO {
         return XQuery.getBeanList(Bill.class, sql, begin, end);
     }
 
-    @Override
-    public Bill findServicingByCardId(Integer cardId) {
-        String sql = "SELECT * FROM Bills WHERE CardId=? AND Status=0";
-        Bill bill = XQuery.getSingleBean(Bill.class, sql, cardId);
-        if (bill == null) { // không tìm thấy -> tạo mới
-            Bill newBill = new Bill();
-            newBill.setCardId(cardId);
-            newBill.setCheckin(new Date());
-            newBill.setStatus(0); // đang phục vụ
-            newBill.setUsername(XAuth.user.getUsername());
-            bill = this.create(newBill); // insert
-        }
-        return bill;
-    }
+//    @Override
+//    public Bill findServicingByCardId(Integer cardId) {
+//        String sql = "SELECT * FROM Bills WHERE CardId=? AND Status=0";
+//        Bill bill = XQuery.getSingleBean(Bill.class, sql, cardId);
+//        if (bill == null) { // không tìm thấy -> tạo mới
+//            Bill newBill = new Bill();
+//            newBill.setCardId(cardId);
+//            newBill.setCheckin(new Date());
+//            newBill.setStatus(0); // đang phục vụ
+//            newBill.setUsername(XAuth.user.getUsername());
+//            bill = this.create(newBill); // insert
+//        }
+//        return bill;
+//    }
 
     @Override
     public List<Bill> findByUserAndTimeRange(String username, Date begin, Date end) {
@@ -135,6 +135,21 @@ public class BillDAOImpl implements BillDAO {
     @Override
     public Object findById(String id) {
         return XQuery.getSingleBean(Bill.class, findByIdSql, id);
+    }
+
+    @Override
+    public Bill findServicingByCardId(Integer cardId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Bill create(Bill entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Bill entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

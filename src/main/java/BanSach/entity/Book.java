@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class Book {
 
+
      private String bookID;         // BookID trong DB
     private String bookName;       // BookName
     private String author;         // Author
@@ -28,6 +29,9 @@ public class Book {
     private String categoryID;     // CategoryID - khóa ngoại
     @Builder.Default
     private String image = "no_image.png"; // Image - mặc định nếu không có
+
+
     
+
 
 }

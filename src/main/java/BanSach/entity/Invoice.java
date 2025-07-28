@@ -4,7 +4,6 @@
  */
 package BanSach.entity;
 
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,13 +11,13 @@ import lombok.NoArgsConstructor;
 
 /**
  *
- * @author ADMIN
+ * @author KHANH HUNG
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Bill {
+public class Invoice {
 
     private String ngayTao;
     private String ngayThanhToan;
