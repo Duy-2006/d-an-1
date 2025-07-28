@@ -1,1 +1,12 @@
 /target/*
+*.lst
+*.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/target/maven-status/maven-compiler-plugin/compile/default-compile
+/target/maven-status/maven-compiler-plugin/compile
+target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/target
+/target/maven-status/maven-compiler-plugin/compile
+*.lst
+/target/maven-status/maven-compiler-plugin/compile
